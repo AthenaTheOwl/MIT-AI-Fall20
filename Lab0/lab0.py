@@ -200,32 +200,3 @@ def furthest_right_point(list_of_points):
     the "key" argument to return the point that is furthest to the right (that
     is, the point with the largest X coordinate)."""
     return max(list_of_points, key=lambda point: point.getX())
-
-
-#### SURVEY ####################################################################
-
-# How much programming experience do you have, in any language?
-#     A. No experience (never programmed before this lab)
-#     B. Beginner (just started learning to program, e.g. took one programming class)
-#     C. Intermediate (have written programs for a couple classes/projects)
-#     D. Proficient (have been programming for multiple years, or wrote programs for many classes/projects)
-#     E. Expert (could teach a class on programming, either in a specific language or in general)
-
-PROGRAMMING_EXPERIENCE = "D"
-
-# How much experience do you have with Python?
-#     A. No experience (never used Python before this lab)
-#     B. Beginner (just started learning, e.g. took 6.0001)
-#     C. Intermediate (have used Python in a couple classes/projects)
-#     D. Proficient (have used Python for multiple years or in many classes/projects)
-#     E. Expert (could teach a class on Python)
-
-PYTHON_EXPERIENCE = "D"
-
-# Finally, the following questions will appear at the end of every lab.
-# The first three are required in order to receive full credit for your lab.
-
-NAME = "Vignesh Gopalakrishnan"
-COLLABORATORS = ""
-HOW_MANY_HOURS_THIS_LAB_TOOK = 2
-SUGGESTIONS = ""  # optional

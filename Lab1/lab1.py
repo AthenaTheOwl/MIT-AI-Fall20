@@ -322,14 +322,6 @@ ANSWER_3 = '1'
 
 ANSWER_4 = '3'
 
-#### SURVEY ####################################################################
-
-NAME = "Vignesh Gopalakrishnan"""
-COLLABORATORS = ""
-HOW_MANY_HOURS_THIS_LAB_TOOK = 5
-WHAT_I_FOUND_INTERESTING = "Breaking down each search into functions and putting them all together. The subtle differences in each function created."
-WHAT_I_FOUND_BORING = "I'm not the biggest fan of the mechanical aspect of coding itself. For example, I got stuck on extensions because the list didn't reinitialize as expected each time (need to use list.copy()), and sorted can be used on zipped lists but not sort. I found these things at least a little frustrating."
-SUGGESTIONS = ""
 
 ###########################################################
 ### Ignore everything below this line; for testing only ###

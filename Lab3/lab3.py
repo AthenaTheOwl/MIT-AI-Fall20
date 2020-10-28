@@ -291,13 +291,3 @@ def all_different(variables):
         for j in range(i+1, len(variables)):
             constraint_list.append(Constraint(variables[i], variables[j], constraint_different))
     return constraint_list
-
-
-#### SURVEY ####################################################################
-
-NAME = 'Vignesh Gopalakrishnan'
-COLLABORATORS = None
-HOW_MANY_HOURS_THIS_LAB_TOOK = 5
-WHAT_I_FOUND_INTERESTING = 'Setting up different ways of solving constraint satisfaction problems'
-WHAT_I_FOUND_BORING = 'Got stuck a few times in coding certain things like the elimination from neighbors'
-SUGGESTIONS = None
