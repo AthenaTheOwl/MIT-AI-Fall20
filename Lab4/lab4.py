@@ -129,15 +129,6 @@ def backchain_to_goal_tree(rules, hypothesis):
 # pretty_goal_tree(backchain_to_goal_tree(zookeeper_rules, 'opus is a penguin'))
 
 
-#### Survey #########################################
-
-NAME = 'Vignesh Gopalakrishnan'
-COLLABORATORS = None
-HOW_MANY_HOURS_THIS_LAB_TOOK = 3
-WHAT_I_FOUND_INTERESTING = None
-WHAT_I_FOUND_BORING = None
-SUGGESTIONS = None
-
 ###########################################################
 ### Ignore everything below this line; for testing only ###
 ###########################################################

@@ -320,12 +320,3 @@ ANSWER_2 = '1'
 ANSWER_3 = '4'
 
 ANSWER_4 = '5'
-
-#### SURVEY ###################################################
-
-NAME = "Vignesh Gopalakrishnan"""
-COLLABORATORS = ""
-HOW_MANY_HOURS_THIS_LAB_TOOK = 12
-WHAT_I_FOUND_INTERESTING = "The concepts involved in adversarial search, actually doing the trees and suchlike"
-WHAT_I_FOUND_BORING = "Actual code implementation with the function recursions. Eventually, I figured out how to do the path correctly one day later - append vs +[list] ARGHHHHHH. I'M SO SAD :((((((("
-SUGGESTIONS = "Less complicated ask for minimax implementation, maybe"
