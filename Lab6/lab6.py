@@ -4,6 +4,9 @@
 from api import *
 from data import *
 import math
+import itertools
+from collections import Counter
+
 log2 = lambda x: math.log(x, 2)
 INF = float('inf')
 
@@ -18,7 +21,9 @@ INF = float('inf')
 def id_tree_classify_point(point, id_tree):
     """Uses the input ID tree (an IdentificationTreeNode) to classify the point.
     Returns the point's classification."""
-    raise NotImplementedError
+    if id_tree.is_leaf():
+        return id_tree.get_node_classification()
+    return id_tree_classify_point(point, id_tree.apply_classifier(point))
 
 
 #### Part 1B: Splitting data with a classifier #################################
@@ -27,7 +32,10 @@ def split_on_classifier(data, classifier):
     """Given a set of data (as a list of points) and a Classifier object, uses
     the classifier to partition the data.  Returns a dict mapping each feature
     values to a list of points that have that value."""
-    raise NotImplementedError
+    m = {}
+    for d in data:
+        m.setdefault(classifier.classify(d), []).append(d)
+    return m
 
 
 #### Part 1C: Calculating disorder #############################################
@@ -36,13 +44,22 @@ def branch_disorder(data, target_classifier):
     """Given a list of points representing a single branch and a Classifier
     for determining the true classification of each point, computes and returns
     the disorder of the branch."""
-    raise NotImplementedError
+    disorder = 0.0
+    cl = split_on_classifier(data, target_classifier)
+    for k in cl.keys():
+        disorder += -(len(cl[k]) / len(data)) * log2(len(cl[k]) / len(data))
+    return disorder
+
 
 def average_test_disorder(data, test_classifier, target_classifier):
     """Given a list of points, a feature-test Classifier, and a Classifier
     for determining the true classification of each point, computes and returns
     the disorder of the feature-test stump."""
-    raise NotImplementedError
+    disorder = 0.0
+    cl = split_on_classifier(data, test_classifier)
+    for k in cl:
+        disorder += (len(cl[k]) / len(data)) * branch_disorder(cl[k], target_classifier)
+    return disorder
 
 
 ## To use your functions to solve part A2 of the "Identification of Trees"
@@ -60,7 +77,18 @@ def find_best_classifier(data, possible_classifiers, target_classifier):
     finds and returns the classifier with the lowest disorder.  Breaks ties by
     preferring classifiers that appear earlier in the list.  If the best
     classifier has only one branch, raises NoGoodClassifiersError."""
-    raise NotImplementedError
+    disorder = 2
+    classifier = None
+    for cl in possible_classifiers:
+        avg = average_test_disorder(data, cl, target_classifier)
+        if avg < disorder:
+            disorder = avg
+            classifier = cl
+            if disorder <= 0:
+                return classifier
+    if classifier is not None and len(split_on_classifier(data, classifier).keys()) == 1:
+        raise NoGoodClassifiersError("No good classifiers found")
+    return classifier
 
 
 ## To find the best classifier from 2014 Q2, Part A, uncomment:
@@ -72,7 +100,22 @@ def construct_greedy_id_tree(data, possible_classifiers, target_classifier, id_t
     optionally a partially completed ID tree, returns a completed ID tree by
     adding classifiers and classifications until either perfect classification
     has been achieved, or there are no good classifiers left."""
-    raise NotImplementedError
+    if id_tree_node is None:
+        id_tree_node = IdentificationTreeNode(target_classifier)
+    if branch_disorder(data, target_classifier) == 0.0:
+        id_tree_node.set_node_classification(target_classifier.classify(data[0]))
+    else:
+        try:
+            best_cl = find_best_classifier(data, possible_classifiers, target_classifier)
+        except NoGoodClassifiersError:
+            return id_tree_node
+        f = split_on_classifier(data, best_cl)
+        id_tree_node.set_classifier_and_expand(best_cl, f)
+        possible_classifiers.remove(best_cl)
+        branches = id_tree_node.get_branches()
+        for k in branches:
+            branches[k] = construct_greedy_id_tree(f[k], possible_classifiers, target_classifier, branches[k])
+    return id_tree_node
 
 
 ## To construct an ID tree for 2014 Q2, Part A:
@@ -89,18 +132,17 @@ def construct_greedy_id_tree(data, possible_classifiers, target_classifier, id_t
 
 #### Part 1E: Multiple choice ##################################################
 
-ANSWER_1 = None
-ANSWER_2 = None
-ANSWER_3 = None
+ANSWER_1 = 'bark_texture'
+ANSWER_2 = 'leaf_shape'
+ANSWER_3 = 'orange_foliage'
 
-ANSWER_4 = None
-ANSWER_5 = None
-ANSWER_6 = None
-ANSWER_7 = None
+ANSWER_4 = [2, 3]
+ANSWER_5 = [3]
+ANSWER_6 = [2]
+ANSWER_7 = 2
 
-ANSWER_8 = None
-ANSWER_9 = None
-
+ANSWER_8 = 'No'
+ANSWER_9 = 'No'
 
 #### OPTIONAL: Construct an ID tree with medical data ##########################
 
@@ -109,8 +151,8 @@ DO_OPTIONAL_SECTION = False
 
 if DO_OPTIONAL_SECTION:
     from parse import *
-    medical_id_tree = construct_greedy_id_tree(heart_training_data, heart_classifiers, heart_target_classifier_discrete)
 
+    medical_id_tree = construct_greedy_id_tree(heart_training_data, heart_classifiers, heart_target_classifier_discrete)
 
 ################################################################################
 ############################# k-NEAREST NEIGHBORS ##############################
@@ -118,23 +160,23 @@ if DO_OPTIONAL_SECTION:
 
 #### Part 2A: Drawing Boundaries ###############################################
 
-BOUNDARY_ANS_1 = None
-BOUNDARY_ANS_2 = None
+BOUNDARY_ANS_1 = 3
+BOUNDARY_ANS_2 = 4
 
-BOUNDARY_ANS_3 = None
-BOUNDARY_ANS_4 = None
+BOUNDARY_ANS_3 = 1
+BOUNDARY_ANS_4 = 2
 
-BOUNDARY_ANS_5 = None
-BOUNDARY_ANS_6 = None
-BOUNDARY_ANS_7 = None
-BOUNDARY_ANS_8 = None
-BOUNDARY_ANS_9 = None
+BOUNDARY_ANS_5 = 2
+BOUNDARY_ANS_6 = 4
+BOUNDARY_ANS_7 = 1
+BOUNDARY_ANS_8 = 4
+BOUNDARY_ANS_9 = 4
 
-BOUNDARY_ANS_10 = None
-BOUNDARY_ANS_11 = None
-BOUNDARY_ANS_12 = None
-BOUNDARY_ANS_13 = None
-BOUNDARY_ANS_14 = None
+BOUNDARY_ANS_10 = 4
+BOUNDARY_ANS_11 = 2
+BOUNDARY_ANS_12 = 1
+BOUNDARY_ANS_13 = 4
+BOUNDARY_ANS_14 = 4
 
 
 #### Part 2B: Distance metrics #################################################
@@ -142,28 +184,44 @@ BOUNDARY_ANS_14 = None
 def dot_product(u, v):
     """Computes dot product of two vectors u and v, each represented as a tuple
     or list of coordinates.  Assume the two vectors are the same length."""
-    raise NotImplementedError
+    u = list(u)
+    v = list(v)
+    dotproduct = 0
+    for a, b in zip(u, v):
+        dotproduct += a * b
+    return dotproduct
+
 
 def norm(v):
     "Computes length of a vector v, represented as a tuple or list of coords."
-    raise NotImplementedError
+    return math.sqrt(dot_product(v, v))
+
 
 def euclidean_distance(point1, point2):
     "Given two Points, computes and returns the Euclidean distance between them."
-    raise NotImplementedError
+    euclid = 0
+    for a, b in zip(point1.coords, point2.coords):
+        euclid += (a - b) ** 2
+    return math.sqrt(euclid)
+
 
 def manhattan_distance(point1, point2):
     "Given two Points, computes and returns the Manhattan distance between them."
-    raise NotImplementedError
+    manhattan = 0
+    for a, b in zip(point1.coords, point2.coords):
+        manhattan += abs(a - b)
+    return manhattan
+
 
 def hamming_distance(point1, point2):
     "Given two Points, computes and returns the Hamming distance between them."
-    raise NotImplementedError
+    return sum(v1 != v2 for v1, v2 in zip(point1.coords, point2.coords))
+
 
 def cosine_distance(point1, point2):
     """Given two Points, computes and returns the cosine distance between them,
     where cosine distance is defined as 1-cos(angle_between(point1, point2))."""
-    raise NotImplementedError
+    return 1 - (dot_product(point1.coords, point2.coords) / (norm(point1.coords) * norm(point2.coords)))
 
 
 #### Part 2C: Classifying points ###############################################
@@ -173,14 +231,22 @@ def get_k_closest_points(point, data, k, distance_metric):
     and a distance metric (a function), returns a list containing the k points
     from the data that are closest to the test point, according to the distance
     metric.  Breaks ties lexicographically by coordinates."""
-    raise NotImplementedError
+    break_ties = sorted(data, key=lambda d: d.coords)
+    distances = sorted(break_ties, key=lambda d: distance_metric(d, point))
+    return distances[:k]
+
 
 def knn_classify_point(point, data, k, distance_metric):
     """Given a test point, a list of points (the data), an int 0 < k <= len(data),
     and a distance metric (a function), returns the classification of the test
     point based on its k nearest neighbors, as determined by the distance metric.
     Assumes there are no ties."""
-    raise NotImplementedError
+    m = []
+    kn = get_k_closest_points(point, data, k, distance_metric)
+    for p in kn:
+        m.append(p.classification)
+    d = Counter(m)
+    return d.most_common(1)[0][0]
 
 
 ## To run your classify function on the k-nearest neighbors problem from 2014 Q2
@@ -194,14 +260,50 @@ def cross_validate(data, k, distance_metric):
     """Given a list of points (the data), an int 0 < k <= len(data), and a
     distance metric (a function), performs leave-one-out cross-validation.
     Return the fraction of points classified correctly, as a float."""
-    raise NotImplementedError
+    c = []
+    cv = 0
+    for d in data:
+        c = data[:]
+        c.remove(d)
+        if d.classification == knn_classify_point(d, c, k, distance_metric):
+            cv += 1
+    return cv / len(data)
+
 
 def find_best_k_and_metric(data):
     """Given a list of points (the data), uses leave-one-out cross-validation to
     determine the best value of k and distance_metric, choosing from among the
     four distance metrics defined above.  Returns a tuple (k, distance_metric),
     where k is an int and distance_metric is a function."""
-    raise NotImplementedError
+    k = 0
+    m = 0.0
+    dm = euclidean_distance
+    for i in range(len(data) - 1):
+        cv = cross_validate(data, i + 1, euclidean_distance)
+        if cv > m:
+            m = cv
+            k = i
+            dm = euclidean_distance
+    for i in range(len(data) - 1):
+        cv = cross_validate(data, i + 1, manhattan_distance)
+        if cv > m:
+            m = cv
+            k = i
+            dm = manhattan_distance
+    for i in range(len(data) - 1):
+        cv = cross_validate(data, i + 1, hamming_distance)
+        if cv > m:
+            m = cv
+            k = i
+            dm = hamming_distance
+    for i in range(len(data) - 1):
+        cv = cross_validate(data, i + 1, cosine_distance)
+
+        if cv > m:
+            m = cv
+            k = i
+            dm = cosine_distance
+    return k, dm
 
 
 ## To find the best k and distance metric for 2014 Q2, part B, uncomment:
@@ -210,21 +312,20 @@ def find_best_k_and_metric(data):
 
 #### Part 2E: More multiple choice #############################################
 
-kNN_ANSWER_1 = None
-kNN_ANSWER_2 = None
-kNN_ANSWER_3 = None
+kNN_ANSWER_1 = 'Overfitting'
+kNN_ANSWER_2 = 'Underfitting'
+kNN_ANSWER_3 = 4
 
-kNN_ANSWER_4 = None
-kNN_ANSWER_5 = None
-kNN_ANSWER_6 = None
-kNN_ANSWER_7 = None
-
+kNN_ANSWER_4 = 4
+kNN_ANSWER_5 = 1
+kNN_ANSWER_6 = 3
+kNN_ANSWER_7 = 3
 
 #### SURVEY ####################################################################
 
-NAME = None
+NAME = 'Vignesh Gopalakrishnan'
 COLLABORATORS = None
-HOW_MANY_HOURS_THIS_LAB_TOOK = None
-WHAT_I_FOUND_INTERESTING = None
-WHAT_I_FOUND_BORING = None
+HOW_MANY_HOURS_THIS_LAB_TOOK = 7
+WHAT_I_FOUND_INTERESTING = 'Building an ID tree'
+WHAT_I_FOUND_BORING = 'Some of the coding parts'
 SUGGESTIONS = None
