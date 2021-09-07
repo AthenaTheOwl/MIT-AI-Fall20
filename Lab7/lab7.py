@@ -194,6 +194,7 @@ ANSWER_9 = 'B'
 
 ANSWER_10 = 'D'
 ANSWER_11 = ['A', 'C']
+<<<<<<< Updated upstream
 ANSWER_12 = ['A', 'E']
 
 #### SURVEY ####################################################################
@@ -204,3 +205,6 @@ HOW_MANY_HOURS_THIS_LAB_TOOK = 6
 WHAT_I_FOUND_INTERESTING = 'Coding a neural net from the ground up'
 WHAT_I_FOUND_BORING = None
 SUGGESTIONS = None
+=======
+ANSWER_12 = ['A', 'E']
+>>>>>>> Stashed changes
