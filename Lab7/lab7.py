@@ -198,13 +198,3 @@ ANSWER_11 = ['A', 'C']
 ANSWER_12 = ['A', 'E']
 
 #### SURVEY ####################################################################
-
-NAME = 'Vignesh Goplakrishnan'
-COLLABORATORS = None
-HOW_MANY_HOURS_THIS_LAB_TOOK = 6
-WHAT_I_FOUND_INTERESTING = 'Coding a neural net from the ground up'
-WHAT_I_FOUND_BORING = None
-SUGGESTIONS = None
-=======
-ANSWER_12 = ['A', 'E']
->>>>>>> Stashed changes
