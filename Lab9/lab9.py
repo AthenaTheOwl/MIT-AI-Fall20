@@ -148,12 +148,3 @@ def adaboost(training_points, classifier_to_misclassified,
 
     return H
 
-
-#### SURVEY ####################################################################
-
-NAME = 'Vignesh Gopalakrishnan'
-COLLABORATORS = None
-HOW_MANY_HOURS_THIS_LAB_TOOK = 5
-WHAT_I_FOUND_INTERESTING = None
-WHAT_I_FOUND_BORING = None
-SUGGESTIONS = None

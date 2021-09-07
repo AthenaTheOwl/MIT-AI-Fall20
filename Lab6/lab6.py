@@ -322,10 +322,3 @@ kNN_ANSWER_6 = 3
 kNN_ANSWER_7 = 3
 
 #### SURVEY ####################################################################
-
-NAME = 'Vignesh Gopalakrishnan'
-COLLABORATORS = None
-HOW_MANY_HOURS_THIS_LAB_TOOK = 7
-WHAT_I_FOUND_INTERESTING = 'Building an ID tree'
-WHAT_I_FOUND_BORING = 'Some of the coding parts'
-SUGGESTIONS = None

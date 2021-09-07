@@ -160,10 +160,3 @@ ANSWER_19 = [1, 2, 4, 5, 6, 7, 8]
 ANSWER_20 = 6
 
 #### SURVEY ####################################################################
-
-NAME = 'Vignesh Gopalakrishnan'
-COLLABORATORS = None
-HOW_MANY_HOURS_THIS_LAB_TOOK = 4
-WHAT_I_FOUND_INTERESTING = None
-WHAT_I_FOUND_BORING = None
-SUGGESTIONS = None
