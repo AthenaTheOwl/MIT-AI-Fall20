@@ -39,6 +39,28 @@ if you forked this repo: pull the latest `master`. if you ever need to run the g
 
 the leak was caught in a 2026-05 audit. git history still contains the old credentials and will be rewritten in a follow-up pass; until then, treat the old values as known-compromised and assume any future reuse is a fresh exposure.
 
+## live demo
+
+this archive can ship as a Streamlit Cloud viewer for the lab map:
+
+```bash
+python -m streamlit run streamlit_app.py
+```
+
+deployment settings:
+
+- platform: Streamlit Community Cloud
+- app file: `streamlit_app.py`
+- dependencies: `requirements.txt`
+
+the app is read-only. it does not run the old course grader, call MIT services, or expose any credential flow.
+
+## connects to
+
+- `LLM-evaluation-framework` for test-first evaluation patterns
+- `trace-to-eval-harness` for turning old checks into durable eval records
+- `prompt-library` for reusable learning and review prompts
+
 ## colophon
 
 MIT 6.034, fall 2020. coursework respects MIT academic policy — if you are currently taking 6.034, do not reference solutions here.
