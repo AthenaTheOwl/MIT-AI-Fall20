@@ -1,68 +1,61 @@
-<!-- ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ -->
+# MIT AI Fall 2020 coursework archive
 
-# N° 08 · MIT · 6.034 · fall 2020
+Ten folders from 6.034: search, games, CSP, k-NN, neural nets, SVMs, Bayes nets, boosting. The labs were graded; the archive is kept as coursework, with old grader files removed from HEAD.
 
-> *coursework, kept for posterity.*
+## What this repo is
 
-problem sets from MIT's introductory artificial intelligence course, fall 2020 (`6.034` / `MIT-AI-Fall20`). archived as-is. the code runs; the labs were graded.
+This is a preserved coursework archive for MIT 6.034. It is useful as a map of the classical AI toolkit before the current model era took over the room.
 
-`python` · 2020 · **status: archived**
+The folders cover:
 
-<!-- ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ -->
+- rule systems and search
+- game search
+- constraint satisfaction
+- nearest neighbors
+- neural networks
+- support vector machines
+- Bayesian networks
+- boosting
+- short quizzes and lab scaffolds
 
-## the labs
+## Run locally
 
-```
-Lab 0   warmup
-Lab 1   rule-based systems
-Lab 2   search
-Lab 3   games
-Lab 4   constraint satisfaction
-Lab 5   k-nearest neighbors / decision trees
-Lab 6   neural networks
-Lab 7   support vector machines
-Lab 8   bayesian inference
-Lab 9   boosting
-```
+The labs were written for the course environment. Use a local Python environment and run each lab from its own folder.
 
-each lab is its own folder. course-provided scaffolding plus implementation. no rewrites, no cleanup — preserved as the artifact of what the class actually was.
-
-## why it's here
-
-a personal time capsule. the algorithms inside are foundational: search, CSP, k-NN, neural nets, SVMs, bayes nets, boosting. the version of you that wrote this code didn't know what it didn't know yet. that's the value.
-
-## security notice
-
-`Lab0/key.py` and `Lab1/key.py` previously contained hardcoded credentials for the MIT 6.034 fall 2020 automated grader (`ai6034.mit.edu/labs/xmlrpc/`). those credentials were valid only for that course offering, were revoked, and the server they pointed at is no longer relevant. the files have been removed from `master`.
-
-if you forked this repo: pull the latest `master`. if you ever need to run the grader scaffolding against a 6.034 server, supply your own `key.py` locally — it's now in `.gitignore` so it won't be committed.
-
-the leak was caught in a 2026-05 audit. git history still contains the old credentials and will be rewritten in a follow-up pass; until then, treat the old values as known-compromised and assume any future reuse is a fresh exposure.
-
-## live demo
-
-this archive can ship as a Streamlit Cloud viewer for the lab map:
+Run the checked-in tester for an individual lab:
 
 ```bash
+cd Lab2
+python tester.py
+```
+
+## Security note
+
+Old grader credential files are not part of the current HEAD. Treat any historic course-grader credentials as expired and unusable, and do not add new `key.py` files to the repo.
+
+## Live demo
+
+This repo has a small Streamlit index for browsing the archive.
+
+<!-- live-url -->
+
+Streamlit entrypoint:
+
+```text
+streamlit_app.py
+```
+
+Local run:
+
+```bash
+python -m pip install -r requirements.txt
 python -m streamlit run streamlit_app.py
 ```
 
-deployment settings:
+## Why keep it
 
-- platform: Streamlit Community Cloud
-- app file: `streamlit_app.py`
-- dependencies: `requirements.txt`
+The repo shows the older stack of AI ideas in executable form. Search still searches. CSPs still prune. Bayes nets still make hidden assumptions visible. That makes the archive a useful reference point beside the newer agent and eval repos.
 
-the app is read-only. it does not run the old course grader, call MIT services, or expose any credential flow.
+## License
 
-## connects to
-
-- `LLM-evaluation-framework` for test-first evaluation patterns
-- `trace-to-eval-harness` for turning old checks into durable eval records
-- `prompt-library` for reusable learning and review prompts
-
-## colophon
-
-MIT 6.034, fall 2020. coursework respects MIT academic policy — if you are currently taking 6.034, do not reference solutions here.
-
-*built downstairs.* — [the basement, room 7](https://github.com/AthenaTheOwl)
+Course materials remain subject to their original course terms.
