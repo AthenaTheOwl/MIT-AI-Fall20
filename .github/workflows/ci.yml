@@ -38,3 +38,6 @@ jobs:
                   if not compileall.compile_dir(str(path), quiet=1):
                       raise SystemExit(f"compile failed: {dir_name}")
           PY
+
+      - name: check archive
+        run: python scripts/check_archive.py

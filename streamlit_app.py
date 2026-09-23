@@ -8,15 +8,15 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent
 
 LABS = {
-    "Lab0": "warmup",
-    "Lab1": "rule-based systems",
-    "Lab2": "search",
-    "Lab3": "games",
-    "Lab4": "constraint satisfaction",
-    "Lab5": "nearest neighbors and decision trees",
-    "Lab6": "neural networks",
-    "Lab7": "support vector machines",
-    "Lab8": "bayesian inference",
+    "Lab0": "getting started",
+    "Lab1": "search",
+    "Lab2": "games",
+    "Lab3": "constraint satisfaction problems",
+    "Lab4": "rule-based systems",
+    "Lab5": "bayesian inference",
+    "Lab6": "k-nearest neighbors and identification trees",
+    "Lab7": "neural nets",
+    "Lab8": "support vector machines",
     "Lab9": "boosting",
 }
 

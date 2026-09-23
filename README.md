@@ -29,6 +29,12 @@ cd Lab2
 python tester.py
 ```
 
+Check that the archive has not rotted — every lab file parses and the index app's labels match the labs:
+
+```bash
+python scripts/check_archive.py
+```
+
 ## Security note
 
 Old grader credential files are not part of the current HEAD. Treat any historic course-grader credentials as expired and unusable, and do not add new `key.py` files to the repo.
